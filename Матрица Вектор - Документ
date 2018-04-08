@@ -1,0 +1,19 @@
+import numpy
+import re
+
+words = []
+sentenses = open('sentenses.txt', 'r').read().splitlines()
+for line in sentenses:
+    for word in re.split('[^a-z]', line.lower()):
+        if not word in words and word != '':
+            words.append(word)
+
+print(len(words))
+
+wordMat = numpy.zeros(shape=(len(sentenses), len(words)))
+
+for i in range(len(sentenses)):
+    for j in range(len(words)):
+        wordMat[i, j] = re.split('[^a-z]', sentenses[i]).count(words[j])
+        
+print(wordMat)  
